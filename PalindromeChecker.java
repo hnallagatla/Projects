@@ -20,12 +20,10 @@ public class PalindromeChecker {
                     indexOne++;
                     indexTwo--;
                     isPalindrome = true;
-            }else if (validIndexes == false)
-                break;
+            }else if (validIndexes == false) break;
             else {
                 isPalindromeChecking = false;
                 isPalindrome = false;
-                break;
             }
         }
         String stringResult = isPalindrome? "The entered string is a palindrome": "The entered string is not a palindrome";
