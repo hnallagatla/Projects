@@ -3,7 +3,7 @@ package SE_17;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class MorseCodeUpdated {
+public class MorseCode {
     public static void main(String[] args) {
 
         System.out.println("Are you entering Morse or English? Enter M for Morse and E for English.");
@@ -15,28 +15,36 @@ public class MorseCodeUpdated {
         Scanner scanner = new Scanner(System.in);
         String inputWord = scanner.nextLine().toLowerCase();
 
-        String morseString = " ";
+        StringBuilder morseString = new StringBuilder();
 
-        char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-        String[] morse = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."};
+        char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '};
+        String[] morse = {".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--..", "/"};
 
-        if(whichVersion.equals("e")) {
-            for (int i = 0; i < inputWord.length(); i++) {
-                if (inputWord.charAt(i) == ' ') morseString += "/";
-                else {
-                    System.out.println(Arrays.binarySearch(letters, inputWord.charAt(i)));
-                    morseString += morse[Arrays.binarySearch(letters, inputWord.charAt(i))];
+        if(whichVersion.equals("e")){
+            for (int i = 0; i<inputWord.length(); i++){
+                for(int j = 0; j<letters.length; j++)
+                    if (inputWord.charAt(i) == letters[j]) {
+                        morseString.append(morse[j]);
+                        break;
+                    }
+            }
+        } else if (whichVersion.equals("m")){
+            String[] inputMorse = inputWord.split(" ");
+            for(int i = 0; i< inputMorse.length; i++){
+                    for (int j =0; j<morse.length; j++){
+                        if(inputMorse[i].equals(morse[j])){
+                            morseString.append(letters[j]);
+                            break;
+                        }
+                    }
                 }
-            }
-        } else{
-            String[] enteredMorse = inputWord.split(" ");
-            for(int i = 0; i<enteredMorse.length; i++){
-                System.out.println(Arrays.binarySearch(morse, enteredMorse[i]));
-                System.out.println(enteredMorse[i]);
-                morseString += letters[Arrays.binarySearch(morse, enteredMorse[i])];
-            }
+        }
+        System.out.println(morseString);
+
         }
 
-        System.out.println(morseString);
+
+
+
     }
-}
+
